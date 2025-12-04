@@ -1,4 +1,4 @@
-podTemplate(containers: [
+podTemplate(label: 'kubeagent',containers: [
     containerTemplate(
         name: 'maven', 
         image: 'maven:3.8.1-jdk-8', 
@@ -11,7 +11,7 @@ podTemplate(containers: [
         command: 'sleep', 
         args: '30d')
   ]) {
-    node(kubeagent) {
+    node('kubeagent') {
         stage('Get a Maven project') {
             // git 'https://github.com/spring-projects/spring-petclinic.git'
             container('maven') {
