@@ -6,5 +6,13 @@ pipeline {
         echo 'Hello world!'
       }
     }
+    stage('Run external Groovy') {
+            steps {
+                script {
+                    def groovyScript = load 'Jenkins.groovy'
+                    groovyScript.runGroovy()
+                }
+            }
+        }
   }
 }
