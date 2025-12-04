@@ -3,6 +3,7 @@ podTemplate(label: 'kubeagent',containers: [
         name: 'maven', 
         image: 'maven:3.9.6-eclipse-temurin-17', 
         command: 'sleep', 
+        ttyEnabled: true
         args: '30d'
         ),
     containerTemplate(
