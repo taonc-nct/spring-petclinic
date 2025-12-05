@@ -1,6 +1,6 @@
 podTemplate(containers: [
     containerTemplate(
-        name: 'maven', 
+        name: 'maven',
         image: 'maven:3.9.6-eclipse-temurin-17', 
         command: 'sleep', 
         ttyEnabled: 'true',
@@ -12,7 +12,7 @@ podTemplate(containers: [
         command: 'sleep', 
         args: '30d')
   ]) {
-    node('kubeagent') {
+    node('POD_LABEL') {
         stage('Get a Maven project') {
             // git 'https://github.com/spring-projects/spring-petclinic.git'
             container('maven') {
@@ -23,8 +23,6 @@ podTemplate(containers: [
                 }
             }
         }
-
-
 
 
     }
