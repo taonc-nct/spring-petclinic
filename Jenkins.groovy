@@ -1,4 +1,4 @@
-podTemplate(label: 'kubeagent',containers: [
+podTemplate(containers: [
     containerTemplate(
         name: 'maven', 
         image: 'maven:3.9.6-eclipse-temurin-17', 
