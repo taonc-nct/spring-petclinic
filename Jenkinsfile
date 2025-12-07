@@ -8,7 +8,7 @@ podTemplate(
 
     node('kubeagent') {
         stage('Get a Maven project') {
-            //git 'https://github.com/jenkinsci/kubernetes-plugin.git'
+            git 'https://github.com/taonc-nct/spring-petclinic.git/'
             container('maven') {
                 stage('Build a Maven project') {
                      sh 'mvn -B -ntp clean install'
