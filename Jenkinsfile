@@ -11,7 +11,7 @@ podTemplate(
             //git 'https://github.com/jenkinsci/kubernetes-plugin.git'
             container('maven') {
                 stage('Build a Maven project') {
-                    echo 'maven'
+                     sh 'mvn -B -ntp clean install'
                 }
             }
         }
@@ -20,7 +20,7 @@ podTemplate(
             //git url: 'https://github.com/hashicorp/terraform.git', branch: 'main'
             container('golang') {
                 stage('Build a Go project') {
-                  echo 'maven'
+                  echo 'tao đang ở golang'
                 }
             }
         }
