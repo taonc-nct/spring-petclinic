@@ -2,20 +2,16 @@ podTemplate(
     agentContainer: 'maven',
     agentInjection: true,
     containers: [
-        containerTemplate(name: 'maven', image: 'maven:3.9.9-eclipse-temurin-17'),
-        containerTemplate(name: 'golang', image: 'golang:1.16.5', command: 'sleep', args: '99d')
-  ]) {
+        containerTemplate(name: 'maven', image: 'maven:3.9.9-eclipse-temurin-17', command: 'cat', ttyEnabled: true),
+        containerTemplate(name: 'golang', image: 'golang:1.16.5', command: 'sleep', args: '99d', ttyEnabled: true)
+    ]
+) {
     node('kubeagent') {
-        stage('Get a Maven project') {
-            // git 'https://github.com/spring-projects/spring-petclinic.git'
-            container('maven') {
-                stage('Build a Maven project') {
-                    sh '''
-                    echo "maven build"
-                    '''
-                }
-            }
+        container('maven') {
+            sh 'echo maven ok'
         }
-
+        container('golang') {
+            sh 'echo golang ok'
+        }
     }
 }
