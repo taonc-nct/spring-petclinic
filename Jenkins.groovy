@@ -12,7 +12,7 @@ podTemplate(containers: [
         command: 'sleep', 
         args: '30d')
   ]) {
-    node('POD_LABEL') {
+    node('kubeagent') {
         stage('Get a Maven project') {
             // git 'https://github.com/spring-projects/spring-petclinic.git'
             container('maven') {
@@ -23,7 +23,6 @@ podTemplate(containers: [
                 }
             }
         }
-
 
     }
 }
