@@ -12,7 +12,8 @@ podTemplate(
             git url: 'https://github.com/taonc-nct/spring-petclinic.git', branch: 'main'
             container('maven') {
                 stage('Build a Maven project') {
-                     sh 'mvn -B -ntp clean install'
+                    echo "inside"
+                    sh 'mvn -B -ntp clean package'
                 }
             }
         }
