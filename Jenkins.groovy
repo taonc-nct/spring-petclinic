@@ -7,6 +7,7 @@ podTemplate(
     ]
 ) {
     node('kubeagent') {
+        
         container('maven') {
             sh 'echo maven ok'
         }
