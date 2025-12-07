@@ -1,4 +1,5 @@
 podTemplate(
+  label: 'kubeagent',
   agentContainer: 'maven',
   agentInjection: true,
   containers: [
