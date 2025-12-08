@@ -1,31 +1,38 @@
-podTemplate(
-  label: 'kubeagent',
-  agentContainer: 'maven',
-  agentInjection: true,
-  containers: [
-    containerTemplate(name: 'maven', image: 'maven:3.9.9-eclipse-temurin-17', command: '', args: ''),
-    containerTemplate(name: 'golang', image: 'golang:1.16.5', command: 'sleep', args: '99d')
-  ]) {
-
-    node(POD_LABEL) {
-        stage('Get a Maven project') {
-            git url: 'https://github.com/taonc-nct/spring-petclinic.git', branch: 'main'
-            container('maven') {
-                stage('Build a Maven project') {
-                    echo "inside"
-                    sh 'mvn -B -ntp clean package'
-                }
-            }
-        }
-
-        stage('Get a Golang project') {
-            //git url: 'https://github.com/hashicorp/terraform.git', branch: 'main'
-            container('golang') {
-                stage('Build a Go project') {
-                  echo 'tao đang ở golang'
-                }
-            }
-        }
-
+pipeline {
+  agent {
+    kubernetes {
+      yaml '''
+        apiVersion: v1
+        kind: Pod
+        metadata:
+          labels:
+            some-label: some-label-value
+        spec:
+          containers:
+          - name: maven
+            image: maven:3.9.9-eclipse-temurin-17
+            command:
+            - cat
+            tty: true
+          - name: busybox
+            image: busybox
+            command:
+            - cat
+            tty: true
+        '''
+      retries 2
     }
+  }
+  stages {
+    stage('Run maven') {
+      steps {
+        container('maven') {
+          sh 'mvn -version'
+        }
+        container('busybox') {
+          sh '/bin/busybox'
+        }
+      }
+    }
+  }
 }
