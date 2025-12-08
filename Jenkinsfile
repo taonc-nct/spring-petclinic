@@ -7,7 +7,7 @@ podTemplate(
     containerTemplate(name: 'golang', image: 'golang:1.16.5', command: 'sleep', args: '99d')
   ]) {
 
-    node('kubeagent') {
+    node(POD_LABEL) {
         stage('Get a Maven project') {
             git url: 'https://github.com/taonc-nct/spring-petclinic.git', branch: 'main'
             container('maven') {
